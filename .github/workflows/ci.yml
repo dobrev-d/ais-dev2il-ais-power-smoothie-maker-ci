@@ -1,10 +1,8 @@
 name: CI
 
 on:
-  # Run on pushes to the main branch
   push:
     branches: [ "main" ]
-  # Run on pull requests targeting the main branch
   pull_request:
     branches: [ "main" ]
 
@@ -12,28 +10,23 @@ jobs:
   test:
     name: Build & Test
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    # Install uv
-    - name: Install uv
-      uses: astral-sh/setup-uv@v5
-      with:
-        # Enables caching of uv's virtual environments between runs.
-        enable-cache: true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
-    # Set up Python using the .python-version file
-    - name: Set up Python
-      run: uv python install
+      - name: Set up Python
+        run: uv python install
 
-    # Install dependencies
-    - name: Install the project
-      run: uv sync --frozen
+      - name: Install the project
+        run: uv sync --frozen
 
-    # Run tests
-    - name: Run tests
-      run: uv run pytest
+      - name: Run tests
+        run: uv run pytest
+
   scan: # This is now correctly indented under 'jobs'
     name: Security Checks
     runs-on: ubuntu-latest
