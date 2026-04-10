@@ -48,5 +48,5 @@ jobs:
           set -o pipefail
           echo "### 🛡️ Security Audit Results" >> $GITHUB_STEP_SUMMARY
           echo '```text' >> $GITHUB_STEP_SUMMARY
-          uvx uv-secure --config=pyproject.toml | tee -a $GITHUB_STEP_SUMMARY
+          uvx uv-secure .  --config=pyproject.toml | tee -a $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
